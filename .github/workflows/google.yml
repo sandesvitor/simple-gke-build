@@ -39,7 +39,6 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          gcloud config set container/use_client_certificate True
           ./kustomize build ./deployments | kubectl apply -f -
           ./kustomize build ./service | kubectl apply -f -
           kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ${{ env.WORKING_DIR }}/configs/configmap.yaml
