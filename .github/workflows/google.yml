@@ -41,7 +41,7 @@ jobs:
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ./configs/configmap.yaml
           kubectl apply -n stone-test -f ./configs/configmap.yaml
-          kubectl delete deployment -n stone-test
+          kubectl delete deployments -n stone-test --all
           kubectl apply -n stone-test -f ./deployments/example-deployment.yaml
           kubectl get services -o wide
         working-directory: ${{ env.WORKING_DIR }}
