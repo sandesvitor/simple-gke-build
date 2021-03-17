@@ -3,8 +3,7 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
-      - master
-      - gke_deploy
+      - develop
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -30,18 +29,16 @@ jobs:
           service_account_key: ${{ secrets.GKE_KEY }}
 
       # Set up kustomize
-      - name: Set up Kustomize
-        run: |
-          curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-          chmod u+x ./kustomize
-        working-directory: ${{ env.WORKING_DIR }}
+      # - name: Set up Kustomize
+      #   run: |
+      #     curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+      #     chmod u+x ./kustomize
+      #   working-directory: ${{ env.WORKING_DIR }}
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          ./kustomize build ./deployments | kubectl apply -f -
-          ./kustomize build ./service | kubectl apply -f -
           kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ${{ env.WORKING_DIR }}/configs/configmap.yaml
           kubectl rollout status deployment/example-deployment.yaml
           kubectl get services -o wide
