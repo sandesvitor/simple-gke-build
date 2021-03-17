@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K8s Study!</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            width: 100vw;
+            max-width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color:#1A1A1D;
+        }
+
+        .box {
+            position: relative;
+            display: inline-block;
+            width: 50%;
+            height: 0;
+            padding: 25% 0;
+            border-radius: 50%;
+
+            border: 10px solid #950740;
+            background-color: #1A1A1D;
+            color: #C3073F;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            font-size: 1.5em; 
+        }
+
+        .second-text {
+            font-size: 1em;
+        }
+
+        span {
+            font-size: 0.8em;
+            font-weight: 300;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="box">
+        <h1>Hello From GKE!</h1>
+        <button id="only-action">Click Me!</button>
+    </div>
+
+    <script>
+        const button = document.querySelector('#only-action')
+        const box = document.querySelector('.box')
+        const changeText = () => {
+            box.innerHTML = "<h1 class='second-text'>This is a<br>sample Frontend for my interview!<br><span>(nginx deployment with nginx LoadBalancer service running on Google Kubernetes Engine!)</span></h1>"
+        }
+        button.onclick = changeText
+    </script>
+</body>
+</html>
