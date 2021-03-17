@@ -20,10 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Testing VM
-        run: |
-          echo "Listing to check with volumes are mapped:"
-          ls -la
 
       # Setup gcloud CLI
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
@@ -44,6 +40,6 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ./configs/configmap.yaml
-          kubectl rollout status ./deployment/example-deployment.yaml
+          kubectl rollout restart -n stone-test ./deployment/example-deployment.yaml
           kubectl get services -o wide
         working-directory: ${{ env.WORKING_DIR }}
