@@ -40,6 +40,6 @@ jobs:
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
           kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ./configs/configmap.yaml
-          kubectl rollout restart -n stone-test ./deployment/example-deployment.yaml
+          kubectl rollout restart ./deployment/example-deployment.yaml -n stone-test
           kubectl get services -o wide
         working-directory: ${{ env.WORKING_DIR }}
