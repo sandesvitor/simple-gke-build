@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  index.html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n
+    \   <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\"
+    content=\"width=device-width, initial-scale=1.0\">\n    <title>K8s Study!</title>\n\n
+    \   <style>\n        * {\n            box-sizing: border-box;\n        }\n\n        body
+    {\n            margin: 0;\n            width: 100vw;\n            max-width: 100%;\n
+    \           height: 100vh;\n            display: flex;\n            flex-direction:
+    column;\n            justify-content: center;\n            align-items: center;\n
+    \           background-color:#1A1A1D;\n        }\n\n        .box {\n            position:
+    relative;\n            display: inline-block;\n            width: 50%;\n            height:
+    0;\n            padding: 25% 0;\n            border-radius: 50%;\n\n            border:
+    10px solid #950740;\n            background-color: #1A1A1D;\n            color:
+    #C3073F;\n            display: flex;\n            flex-direction: column;\n            justify-content:
+    center;\n            text-align: center;\n            align-items: center;\n            font-size:
+    1.5em; \n        }\n\n        .second-text {\n            font-size: 1em;\n        }\n\n
+    \       span {\n            font-size: 0.8em;\n            font-weight: 300;\n
+    \       }\n\n    </style>\n\n</head>\n<body>\n    <div class=\"box\">\n        <h1>Hello
+    From GKE!</h1>\n        <button id=\"only-action\">Click Me!</button>\n    </div>\n\n
+    \   <script>\n        const button = document.querySelector('#only-action')\n
+    \       const box = document.querySelector('.box')\n        const changeText =
+    () => {\n            box.innerHTML = \"<h1 class='second-text'>This is a<br>sample
+    Frontend for my interview!<br><span>(nginx deployment with nginx LoadBalancer
+    service running on Google Kubernetes Engine!)</span></h1>\"\n        }\n        button.onclick
+    = changeText\n    </script>\n</body>\n</html>"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: nginx-index-html-configmap
