@@ -43,7 +43,7 @@ jobs:
       - name: Deploy
         run: |
           gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-          kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ${{ env.WORKING_DIR }}/configs/configmap.yaml
-          kubectl rollout status deployment/example-deployment.yaml
+          kubectl create configmap nginx-index-html-configmap --from-file=index.html -o yaml --dry-run=client > ./configs/configmap.yaml
+          kubectl rollout status ./deployment/example-deployment.yaml
           kubectl get services -o wide
         working-directory: ${{ env.WORKING_DIR }}
